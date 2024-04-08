@@ -37,7 +37,7 @@ const FlowerList: React.FC = () => {
     const [flowersPerPage] = useState<number>(9); // Number of flowers per page
     const [availabilityFilters, setAvailabilityFilters] = useState<string[]>([]); // State for Availability filters
     const [priceFilters, setPriceFilters] = useState<string[]>([]); // State for Price filters
-    const [productTypeFilters, setProductTypeFilters] = useState<string[]>([]); // State for Product Type filters
+    //const [productTypeFilters, setProductTypeFilters] = useState<string[]>([]); // State for Product Type filters
     const [brandFilters, setBrandFilters] = useState<string[]>([]); // State for Brand filters
     const [colorFilters, setColorFilters] = useState<string[]>([]); // State for Color filters
     const [materialFilters, setMaterialFilters] = useState<string[]>([]); // State for Material filters
@@ -54,7 +54,7 @@ const FlowerList: React.FC = () => {
 
     const fetchFlowers = async () => {
         try {
-            const response = await axios.get('http://localhost:8089/flowers');
+            const response = await axios.get('http://localhost:8088/flowers');
             const data: Flower[] = response.data;
             setFlowers(data);
             setFilteredFlowers(data);
@@ -78,9 +78,9 @@ const FlowerList: React.FC = () => {
             filteredData = filteredData.filter(flower => availabilityFilters.includes(flower.availability));
         }
 
-        if (productTypeFilters.length > 0) {
-            filteredData = filteredData.filter(flower => productTypeFilters.includes(flower.product_type));
-        }
+        // if (productTypeFilters.length > 0) {
+        //     filteredData = filteredData.filter(flower => productTypeFilters.includes(flower.product_type));
+        // }
 
         if (brandFilters.length > 0) {
             filteredData = filteredData.filter(flower => brandFilters.includes(flower.brand));
@@ -99,7 +99,7 @@ const FlowerList: React.FC = () => {
         }
 
         setFilteredFlowers(filteredData);
-    }, [availabilityFilters, priceFilters, productTypeFilters, brandFilters, colorFilters, materialFilters, sizeFilters, flowers]);
+    }, [availabilityFilters, priceFilters, brandFilters, colorFilters, materialFilters, sizeFilters, flowers]);
 
     // Handle filter changes
     const handleAvailabilityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
